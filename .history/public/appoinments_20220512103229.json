@@ -1,0 +1,35 @@
+[
+    {
+        "_id":1,
+        "name":"Teeth Orthodontics",
+        "slots":[
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am"
+        ]
+    },
+    {
+        "_id":2,
+        "name":"Cosmetics Dentistry",
+        "slots":[
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am"
+        ]
+    },
+    {
+        "_id":3,
+        "name":"Teeth Clenning",
+        "slots":[
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am",
+            "8.00am -- 9.00am"
+        ]
+    }
+]
