@@ -3,10 +3,10 @@ import React from 'react';
 const Service = ({ meet }) => {
     const { name, slots } = meet;
     return (
-        <div class="card lg:max-w-lg bg-base-100 shadow-xl">
-            <div class="card-body text-center">
+        <div className="card lg:max-w-lg bg-base-100 shadow-xl">
+            <div className="card-body text-center">
 
-                <h2 class="text-2xl text-primary text-center">{name} </h2>
+                <h2 className="text-2xl text-primary text-center">{name} </h2>
 
                 <p> {slots.length > 0 ?
                     <span className='text-accent' >{slots[0]}</span>
@@ -18,8 +18,8 @@ const Service = ({ meet }) => {
                     {slots.length} {slots.length >= 1 ? 'spaces' : 'space'} spaces available
                 </p>
 
-                <div class="card-actions justify-center">
-                    <button disabled={slots.length > 0 ? false : true} class="btn btn-primary">Appointment Now</button>
+                <div className="card-actions justify-center">
+                    <button disabled={slots.length > 0 ? false : true} className="btn btn-primary">Appointment Now</button>
                 </div>
             </div>
         </div>

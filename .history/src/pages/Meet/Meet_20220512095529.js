@@ -9,8 +9,8 @@ const Meet = () => {
     const [date, setDate] = useState(new Date());
 
     return (
-        <div class="hero min-h-screen bg-base-100">
-            <div class="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero min-h-screen bg-base-100">
+            <div className="hero-content flex-col lg:flex-row-reverse">
                 <img className='w-48' src={chair} alt='chair' />
                 <div>
                     <DayPicker
