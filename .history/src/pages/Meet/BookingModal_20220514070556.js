@@ -13,33 +13,19 @@ const BookingModal = ({ book, date ,setBook}) => {
     const handleSumbit = event =>{
         event.preventDefault();
         const slot = event.target.slot.value;
-        
+        setBook(null);
 
-        const handleBooking  ={
-            bookingId : _id,
-            bookingName : name,
-            bookingTime : format(date,'PP'),
+        const booking  ={
+            bookingId = _id,
+            bookingName = name,
+            patientName = user.displayName,
+            patientEmail = user.email,
+            bookingTime = format(date,'PP'),
             slot,
-            patientName : user.displayName,
-            patientEmail : user.email,
-            patientAddress:event.target.address.value,
-            patientPhone:event.target.phone.value  
 
-        };
 
-        fetch('http://localhost:5000/booking',{
-            method:'POST',
-            headers:{
-                'content-type':'application/json'
-            },
-            body:JSON.stringify(handleBooking)
-        })
-        .then( res => res.json())
-        .then(data =>{
-            console.log(data);
-            setBook(null);
-        })
-        
+        }
+        console.log(_id,name,slot);
     }
     return (
         <div>

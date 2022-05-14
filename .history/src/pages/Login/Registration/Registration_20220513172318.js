@@ -9,7 +9,7 @@ const Registration = () => {
     const [activeUser, activeLoading]  = useAuthState(auth);
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location?.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/';
 
     // ------------send varification ---------------- 
     const [sendEmailVerification, sending , varifyError] = useSendEmailVerification(auth);
@@ -18,10 +18,8 @@ const Registration = () => {
     const [signInWithGoogle, g_user, g_loading, g_error] = useSignInWithGoogle(auth);
 
 
-    // --------------react  form ----------
+    // --------------input singin ----------
     const { register, formState: { errors }, handleSubmit } = useForm();
-
-    // ------------ input sign in ------------  
     const [
         createUserWithEmailAndPassword,
         user,
@@ -31,7 +29,7 @@ const Registration = () => {
 
 
 
-    // update profile =-----------------------------
+    // update profiel =-----------------------------
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
 

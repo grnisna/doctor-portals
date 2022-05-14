@@ -63,7 +63,7 @@ const Registration = () => {
     // ---------------submit button --------------
     const onSubmit = async data => {
         console.log(data)
-        await sendEmailVerification(data.email);
+        await sendEmailVerification();
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({displayName:data.name});
         

@@ -9,19 +9,17 @@ const Registration = () => {
     const [activeUser, activeLoading]  = useAuthState(auth);
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location?.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/';
 
     // ------------send varification ---------------- 
-    const [sendEmailVerification, sending , varifyError] = useSendEmailVerification(auth);
+    const [sendEmailVerification, sending ] = useSendEmailVerification(auth);
 
     // ----------- google sign in --------------
     const [signInWithGoogle, g_user, g_loading, g_error] = useSignInWithGoogle(auth);
 
 
-    // --------------react  form ----------
+    // --------------input singin ----------
     const { register, formState: { errors }, handleSubmit } = useForm();
-
-    // ------------ input sign in ------------  
     const [
         createUserWithEmailAndPassword,
         user,
@@ -31,18 +29,19 @@ const Registration = () => {
 
 
 
-    // update profile =-----------------------------
+    // update profiel =-----------------------------
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
 
 
     // navigate -------------------------- 
     useEffect(()=>{
-        if(g_user ||  user){            
-            navigate(from, { replace: true });
+        if(g_user || activeUser){
+            console.log(activeUser);
+            navigate(from, {replace:true})
         }
     
-    },[g_user,from,navigate,user])
+    },[g_user,activeUser,from,navigate])
 
 
 
@@ -55,15 +54,14 @@ const Registration = () => {
 
     // -------error --------
     let signInError;
-    if (g_error || error || updateError || varifyError) {
-        signInError = <p><span style={{ color: 'red' }} >{error?.message || g_error?.message || updateError?.message || varifyError?.message }  </span></p>
+    if (g_error || error || updateError) {
+        signInError = <p><span style={{ color: 'red' }} >{error?.message || g_error?.message || updateError?.message} </span></p>
     };
 
 
     // ---------------submit button --------------
     const onSubmit = async data => {
         console.log(data)
-        await sendEmailVerification(data.email);
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({displayName:data.name});
         

@@ -1,106 +1,75 @@
-import React, { useEffect } from 'react';
+
 import auth from '../../../firebase.init';
-import { useAuthState, useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import Loading from '../../SharedPage/Loading/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const Registration = () => {
-    const [activeUser, activeLoading]  = useAuthState(auth);
-    const location = useLocation();
+
+const Login = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // ----------- reset password ---------------
+    const [sendPasswordResetEmail, sending, ] = useSendPasswordResetEmail(auth);
+
+    // const from = location.state?.from?.pathname || "/";
     const from = location?.state?.from?.pathname || '/';
-
-    // ------------send varification ---------------- 
-    const [sendEmailVerification, sending , varifyError] = useSendEmailVerification(auth);
-
-    // ----------- google sign in --------------
+ 
+    // ---------sign in google ---------------
     const [signInWithGoogle, g_user, g_loading, g_error] = useSignInWithGoogle(auth);
 
 
-    // --------------react  form ----------
+        // ----------react form  ---------------
     const { register, formState: { errors }, handleSubmit } = useForm();
-
-    // ------------ input sign in ------------  
     const [
-        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useSignInWithEmailAndPassword(auth);
 
-
-
-    // update profile =-----------------------------
-    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-
-
-
-    // navigate -------------------------- 
-    useEffect(()=>{
-        if(g_user ||  user){            
+    useEffect( ()=>{
+        if(user || g_user){
             navigate(from, { replace: true });
         }
-    
-    },[g_user,from,navigate,user])
+    },[user,navigate,from,g_user])
 
-
-
-    //   -------loaading----------------------
-    if (g_loading || loading || updating || sending) {
+    //   -------loaading------
+    if (g_loading || loading) {
         return <Loading></Loading>
     };
 
-
-
     // -------error --------
     let signInError;
-    if (g_error || error || updateError || varifyError) {
-        signInError = <p><span style={{ color: 'red' }} >{error?.message || g_error?.message || updateError?.message || varifyError?.message }  </span></p>
-    };
+    if (g_error || error) {
+        signInError = <p><span style={{ color: 'red' }} >{error?.message || g_error.message} </span></p>
+    }
 
-
-    // ---------------submit button --------------
-    const onSubmit = async data => {
-        console.log(data)
-        await sendEmailVerification(data.email);
-        await createUserWithEmailAndPassword(data.email, data.password);
-        await updateProfile({displayName:data.name});
+    const onSubmit =  data => {        
+        signInWithEmailAndPassword(data.email, data.password)
         
+ 
     };
+     const resetPassword = (data) =>{
+        sendPasswordResetEmail(data.email);
+     }
+
+
+
     return (
         <div className=" lg:max-w-lg mx-auto border shadow-lg mt-10 text-primary-content py-10">
 
-            <h2 className="text-center text-2xl">Registration</h2>
+            <h2 className="text-center text-2xl">Login</h2>
 
             {/* ----------------- login input  -------------- */}
 
 
             {/* ---------error handleing by react hook form ---------  */}
             <form onSubmit={handleSubmit(onSubmit)} className="form-control w-full max-w-xs mx-auto">
-              
+
                 <div className="form-control w-full max-w-xs">
-
-                    {/* ------------------name -------------  */}
-                    <label className="label">
-                        <span className="label-text">Your name</span>
-                    </label>
-
-                    <input type="text"
-                        placeholder="Your Name"
-                        className="input input-bordered w-full max-w-xs"
-                        {...register("name", {
-                            required: {
-                                value: true,
-                                message: 'Require Your Name address'
-                            }
-                        })}
-                    />
-                    <label className="label">
-                        {errors.text?.type === 'required' && <span className='text-red-500' >{errors.text.message}</span>}
-
-                    </label>
-                    {/* ------------------email -------------  */}
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
@@ -124,7 +93,7 @@ const Registration = () => {
                         {errors.email?.type === 'pattern' && <span className='text-red-500' >{errors.email.message}</span>}
 
                     </label>
-                            {/* --------------password----------  */}
+
                     <label className="label">
                         <span className="label-text">Password</span>
                     </label>
@@ -150,9 +119,9 @@ const Registration = () => {
                 </div>
 
                 {signInError}
-                <input type="submit" className='btn btn-primary w-full max-w-xs ' value='registraion' />
-                <p><small>Already have Account to doctors portal <span className='text-primary' ><Link to='/login'> Login</Link></span></small></p>
-
+                <input type="submit" className='btn btn-primary w-full max-w-xs ' value='Login' />
+                <p><small>New to doctors portal <span className='text-primary' ><Link to='/registration'> Registration</Link></span></small></p>
+                <p ><small>Forget Password </small></p> <button onClick={()=>resetPassword()} className='btn-red-500'>  Reset password</button>
             </form>
             {/* --------------divider -------------  */}
             <div className="divider">OR</div>
@@ -175,4 +144,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default Login;
