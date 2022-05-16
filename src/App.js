@@ -16,6 +16,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyAppointment from './pages/Dashboard/MyAppointment';
 import Review from './pages/Dashboard/Review';
+import Users from './pages/Dashboard/Users';
+import RequireAdmin from './pages/Login/RequireAdmin/RequireAdmin';
 
 function App() {
   return (
@@ -30,14 +32,15 @@ function App() {
             <Meet></Meet>
           </RequireAuth>
         } ></Route>
-        <Route path='/dashboard'       element={
-          <RequireAuth>
-            <Dashboard></Dashboard>
-          </RequireAuth>
-        } >
+
+
+        <Route path='/dashboard'  element={<RequireAuth>   <Dashboard></Dashboard>   </RequireAuth>} >
           <Route index element={<MyAppointment></MyAppointment>} ></Route>
-          <Route path='/dashboard/:review' element={<Review></Review>} ></Route>
+          <Route path='/dashboard/review' element={<Review></Review>} ></Route>
+          <Route path='/dashboard/users' element={<RequireAdmin>  <Users></Users> </RequireAdmin>}></Route>
         </Route>
+
+
         <Route path='/reviews'    element={<Reviews></Reviews>} ></Route>
         <Route path='/contact'    element={<Contact></Contact>} ></Route>
         <Route path='/login'      element={<Login></Login>} ></Route>

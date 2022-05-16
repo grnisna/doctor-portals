@@ -5,11 +5,13 @@ import { useForm } from "react-hook-form";
 import Loading from '../../SharedPage/Loading/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import useToken from '../../../hooks/useToken';
 
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    
 
     // ----------- reset password ---------------
     const [sendPasswordResetEmail, sending, ] = useSendPasswordResetEmail(auth);
@@ -30,11 +32,14 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    // -----------------------token ---------------------------- 
+    const [token] = useToken(user || g_user)
+
     useEffect( ()=>{
-        if(user || g_user){
+        if(token){
             navigate(from, { replace: true });
         }
-    },[user,navigate,from,g_user])
+    },[navigate,from,token])
 
     //   -------loaading------
     if (g_loading || loading) {

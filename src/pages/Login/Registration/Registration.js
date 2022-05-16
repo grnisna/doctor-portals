@@ -4,12 +4,16 @@ import { useAuthState, useCreateUserWithEmailAndPassword, useSendEmailVerificati
 import { useForm } from "react-hook-form";
 import Loading from '../../SharedPage/Loading/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../../hooks/useToken';
+
+
 
 const Registration = () => {
     const [activeUser, activeLoading]  = useAuthState(auth);
+    
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location?.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/';
 
     // ------------send varification ---------------- 
     const [sendEmailVerification, sending , varifyError] = useSendEmailVerification(auth);
@@ -35,14 +39,18 @@ const Registration = () => {
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
 
+    // use token --------------------------------
+    const [token] = useToken(g_user || user);
+
+
 
     // navigate -------------------------- 
     useEffect(()=>{
-        if(g_user ||  user){            
-            navigate(from, { replace: true });
+        if(token){            
+            navigate('/meet');
         }
     
-    },[g_user,from,navigate,user])
+    },[navigate,user])
 
 
 
@@ -62,7 +70,6 @@ const Registration = () => {
 
     // ---------------submit button --------------
     const onSubmit = async data => {
-        console.log(data)
         await sendEmailVerification(data.email);
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({displayName:data.name});
