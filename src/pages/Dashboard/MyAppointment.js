@@ -10,7 +10,7 @@ const MyAppointment = () => {
     const [myAppoint, setMyAppoint] = useState([]);
     const [user] = useAuthState(auth);
     const email = user.email;
-    console.log(myAppoint);
+    
 
     useEffect(() => {
         if (user) {
@@ -23,7 +23,7 @@ const MyAppointment = () => {
 
             })
                 .then(res => {
-                    console.log(res);
+                    
                     if(res.status === 401 || res.status === 403){
                         signOut(auth);
 
@@ -65,7 +65,10 @@ const MyAppointment = () => {
                                 <td>{appoint.slot} </td>
                                 <td>
                                     {(appoint.price && !appoint.paid) && <Link to={`/dashboard/payment/${appoint._id}`}> <button className='btn btn-error btn-sx' >pay now</button> </Link>} 
-                                    {(appoint.price && appoint.paid) && <span className='text-success' >paid</span>}
+                                    {(appoint.price && appoint.paid) && <div>
+                                        <span className='text-success' >paid</span><br />
+                                        <span className='text-orange-500' >Trnasaction ID: {appoint.transactionId} </span>
+                                        </div>}
                                 </td>
                                 
                             </tr>)

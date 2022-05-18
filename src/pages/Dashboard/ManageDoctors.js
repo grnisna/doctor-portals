@@ -8,7 +8,7 @@ const ManageDoctors = () => {
 
     const [deleteDoctor, setDeleteDoctor] = useState(null);
 
-    const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch('http://localhost:5000/doctor', {
+    const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch('https://shrouded-hollows-10086.herokuapp.com/doctor', {
         method: 'GET', headers: { authorization: `Bearer ${localStorage.getItem('accessToken')}` }
     }).then(res => res.json()));
     if (isLoading) {
