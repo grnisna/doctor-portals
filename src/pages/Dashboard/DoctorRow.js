@@ -1,15 +1,15 @@
 import React from 'react';
-import { toast } from 'react-toastify';
+
 
 const DoctorRow = ({ doctor, index, refetch, setDeleteDoctor }) => {
-    const { name, specialty, img, email } = doctor;
+    const { name, specialty, img } = doctor;
 
   
     return (
         <tr>
             <th>{index + 1} </th>
-            <div class="avatar">
-                <div class="w-16 rounded-full">
+            <div className="avatar">
+                <div className="w-16 rounded-full">
                     <img className='img-fluid' src={img} alt='' />
                 </div>
             </div>
@@ -17,7 +17,7 @@ const DoctorRow = ({ doctor, index, refetch, setDeleteDoctor }) => {
             <td>{specialty}</td>
 
             <td>
-                <label for="my-modal-6" onClick={()=>setDeleteDoctor(doctor)} class="btn btn-error btn-xs">Delete</label>
+                <label htmlFor="my-modal-6" onClick={()=>setDeleteDoctor(doctor)} className="btn btn-error btn-xs">Delete</label>
                 
             </td>
         </tr>
