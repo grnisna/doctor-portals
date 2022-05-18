@@ -9,7 +9,7 @@ const BookingModal = ({ treatement, date, setTreatement, refetch }) => {
     const [user] = useAuthState(auth);
 
 
-    const { name, slots, _id } = treatement;
+    const { name, slots, _id, price } = treatement;
 
     const handleSumbit = event => {
         event.preventDefault();
@@ -23,6 +23,7 @@ const BookingModal = ({ treatement, date, setTreatement, refetch }) => {
             treatement: name,
             date: formattedDate,
             slot,
+            price,
             patientName: user.displayName,
             patient: user.email,
             patientAddress: event.target.address.value,
@@ -64,7 +65,7 @@ const BookingModal = ({ treatement, date, setTreatement, refetch }) => {
         //         toast.error(`Already booked on ${data.booked?.bookingTime} at ${data.booked?.slot}`)
         //     }
         // })
-        // fetch('http://localhost:5000/engage', {
+        // fetch('https://shrouded-hollows-10086.herokuapp.com/engage', {
         //     method: 'POST',
         //     headers: { 'content-type': 'application/json' },
         //     body: JSON.stringify(booking)

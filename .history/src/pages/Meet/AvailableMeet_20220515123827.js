@@ -20,13 +20,13 @@ const AvailableMeet = ({date}) => {
 //             return <Loading></Loading>
 //         }
 
-const {data:meeting, isLoading} = useQuery(['available',formattedDate],()=>fetch(`http://localhost:5000/available?date=${formattedDate}`).then(res => res.json()))
+const {data:meeting, isLoading} = useQuery(['available',formattedDate],()=>fetch(`https://shrouded-hollows-10086.herokuapp.com/available?date=${formattedDate}`).then(res => res.json()))
 
 if(isLoading){
     return <Loading></Loading>
 }
     // useEffect( ()=>{
-    //     const url = `http://localhost:5000/available?date=${formattedDate}`;
+    //     const url = `https://shrouded-hollows-10086.herokuapp.com/available?date=${formattedDate}`;
         
     //     fetch(url)
     //     .then( res => res.json())

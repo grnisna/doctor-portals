@@ -28,7 +28,7 @@ const BookingModal = ({ book, date ,setBook}) => {
 
         };
 
-        fetch('http://localhost:5000/booking',{
+        fetch('https://shrouded-hollows-10086.herokuapp.com/booking',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

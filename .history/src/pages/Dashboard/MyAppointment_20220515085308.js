@@ -8,7 +8,7 @@ const MyAppointment = () => {
     const email = user.email;
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/booking?email=${email}`)
+            fetch(`https://shrouded-hollows-10086.herokuapp.com/booking?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setMyAppoint(data);

@@ -50,7 +50,7 @@ const Registration = () => {
             navigate('/meet');
         }
     
-    },[navigate,user])
+    },[navigate,user,token])
 
 
 

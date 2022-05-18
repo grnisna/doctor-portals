@@ -39,7 +39,7 @@ const BookingModal = ({ book, date, setBook, refetch }) => {
             patientPhone: event.target.phone.value
         }
 
-        // fetch('http://localhost:5000/booking',{
+        // fetch('https://shrouded-hollows-10086.herokuapp.com/booking',{
         //     method:'POST',
         //     headers:{
         //         'content-type':'application/json'
@@ -57,7 +57,7 @@ const BookingModal = ({ book, date, setBook, refetch }) => {
         //         toast.error(`Already booked on ${data.booked?.bookingTime} at ${data.booked?.slot}`)
         //     }
         // })
-        fetch('http://localhost:5000/engage', {
+        fetch('https://shrouded-hollows-10086.herokuapp.com/engage', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(handleBooking)

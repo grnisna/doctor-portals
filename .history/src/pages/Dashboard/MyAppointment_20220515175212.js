@@ -9,7 +9,7 @@ const MyAppointment = () => {
     
     useEffect(() => {
         if (user) {
-            const url = `http://localhost:5000/booking?email=${email}`;
+            const url = `https://shrouded-hollows-10086.herokuapp.com/booking?email=${email}`;
             console.log(url);
             fetch(url)
                 .then(res => res.json())

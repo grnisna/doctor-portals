@@ -4,7 +4,7 @@ import UserRow from './UserRow';
 import Loading from '../SharedPage/Loading/Loading';
 
 const Users = () => {
-    const {data:users, isLoading,refetch} = useQuery('users',()=>fetch('http://localhost:5000/user',{
+    const {data:users, isLoading,refetch} = useQuery('users',()=>fetch('https://shrouded-hollows-10086.herokuapp.com/user',{
         method:'GET',headers:{authorization:`Bearer ${localStorage.getItem('accessToken')}`}
     }).then(res=>res.json()));
     if(isLoading){

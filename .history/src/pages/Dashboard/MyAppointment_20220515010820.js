@@ -5,7 +5,7 @@ const MyAppointment = () => {
     const [myAppoint , setMyAppoint] = useState([]);
     const [user] = useAuthState(auth);
     useEffect( ()=>{
-        fetch(`http://localhost:5000/booking`)
+        fetch(`https://shrouded-hollows-10086.herokuapp.com/booking`)
         .then( res => res.json())
         .then( data =>{
             setMyAppoint(data);

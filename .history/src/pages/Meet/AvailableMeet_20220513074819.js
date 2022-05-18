@@ -8,7 +8,7 @@ const AvailableMeet = ({date}) => {
     const [book, setBook] = useState(null);
 
     useEffect( ()=>{
-        fetch('http://localhost:5000/service')
+        fetch('https://shrouded-hollows-10086.herokuapp.com/service')
         .then( res => res.json())
         .then ( data => setMeeting(data));
     } ,[]);
